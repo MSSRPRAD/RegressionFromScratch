@@ -35,98 +35,76 @@ In practice, the Polynomial Regression model is implemented as a Python class or
 * Evaluating the model's performance using appropriate metrics.
 * Using Regularization and Grid Search.
 
+### Regularization Formula
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/Screenshot from 2023-10-16 16-59-23.png "a title")
+
+where:
+
+N = no of samples
+
+lmbda, q = Regularization Hyperparameters
+
+W = Weights
+
 ### Comparative Analysis
 
 Each model is trained using Batch Gradient Descent, where the model's weights are updated iteratively to minimize the mean squared error. Training and testing errors are recorded for each epoch, and the best degree is determined based on these errors. The comparative analysis helps evaluate each model's performance and complexity, allowing for the selection of an appropriate polynomial degree for the given problem.
 
 Let's perform a comparative analysis of the nine polynomial regression models we developed. We will discuss the results and provide an analysis for each degree of the polynomial:
 
-### Degree 0
+Best models for each value of q:
+q=0.5: Degree=7, Learning Rate=0.001, Lambda=0.5, Batch Size=20, Epoch=2571, Test Loss=139793.0962370393
+q=1: Degree=7, Learning Rate=0.001, Lambda=0.0, Batch Size=20, Epoch=2571, Test Loss=139781.55365061367
+q=2: Degree=7, Learning Rate=0.001, Lambda=1.0, Batch Size=20, Epoch=2571, Test Loss=125537.749596721
+q=4: Degree=7, Learning Rate=0.001, Lambda=0.3, Batch Size=20, Epoch=2571, Test Loss=140085.22385513445
 
-* Minimum Train Error:
-* Minimum Test Error:
+Best model for batch_size 1:
+Degree=7, Learning Rate=0.001, Lambda=0.4, Batch Size=1, Epoch=0, Test Loss=363088.41025412834, q=4
 
-**Analysis:**
-Degree 0 represents a constant model. Both the minimum training and testing errors are very high, indicating that this model is overly simplistic and does not capture the data's patterns effectively. This degree is not suitable for modeling the relationship between the features and the target variable.
+Best model for batch_size 20:
+Degree=7, Learning Rate=0.001, Lambda=1.0, Batch Size=20, Epoch=2571, Test Loss=125537.749596721, q=2
 
-### Degree 1
-
-* Minimum Train Error:
-* Minimum Test Error:
-
-**Analysis:**
-Degree 1 represents a linear model. The minimum training and testing errors are still quite high, suggesting that this linear model may not capture the underlying complexity of the data well. This degree does not seem to provide a good fit for the problem.
-
-### Degree 2
-
-* Minimum Train Error:
-* Minimum Test Error:
-
-**Analysis:**
-Degree 2 represents a quadratic model. Although it performs slightly better than the linear model, the minimum training and testing errors remain high. This indicates that the quadratic model captures some non-linearity in the data but may not be sufficient to provide an accurate representation.
-
-### Degree 3
-
-* Minimum Train Error:
-* Minimum Test Error:
-
-**Analysis:**
-Degree 3 represents a cubic model. The minimum training and testing errors continue to decrease, indicating that the model is becoming more flexible and capturing additional patterns in the data. Degree 3 shows a significant improvement compared to lower degrees and may be a better choice for this problem.
-
-### Degree 4
-
-* Minimum Train Error:
-* Minimum Test Error:
-
-**Analysis:**
-Degree 4 represents a quartic model. The errors show further improvement over the cubic model, suggesting that the quartic model can fit the data even better with increased complexity. However, the test error is still relatively high, indicating that further investigation may be needed.
-
-### Degree 5
-
-* Minimum Train Error:
-* Minimum Test Error:
-
-**Analysis:**
-Degree 5 represents a quintic model. The minimum testing error decreases further, indicating that the model can capture even more intricate patterns in the data. It achieves a lower testing error than the quartic model, suggesting that it may be a good choice for this problem.
-
-### Degree 6
-
-* Minimum Train Error:
-* Minimum Test Error:
-
-**Analysis:**
-Degree 6 represents a sextic model. It has the lowest minimum training error among all degrees, suggesting that it fits the training data exceptionally well. However, the testing error is substantially higher, indicating a potential issue with overfitting. While it fits the training data closely, it may not generalize well to unseen data.
-
-### Degree 7
-
-* Minimum Train Error:
-* Minimum Test Error:
-
-**Analysis:**
-Degree 7 represents a septic model. While it performs well on the training data, the test error is higher, indicating a possible overfitting issue. The testing error continues to increase compared to the training error, suggesting that this degree may not be the best choice for this problem.
-
-### Degree 8
-
-* Minimum Train Error:
-* Minimum Test Error:
-
-**Analysis:**
-Degree 8 represents an octic model. It's increasingly complex, and it might lead to even more severe overfitting. The test error is higher than the training error, indicating a problem with generalization. This degree may not be suitable for this problem.
-
-### Degree 9
-
-* Minimum Train Error:
-* Minimum Test Error:
-
-**Analysis:**
-Degree 9 represents a nonic model. This is the most complex model among the tested degrees. It has a low training error but a considerably lower testing error compared to the sextic and septic models, indicating that it may have better generalization performance. However, it's essential to be cautious about potential overfitting.
+Best 4 models overall:
+Rank 1: Degree=7, Learning Rate=0.001, Lambda=1.0, Batch Size=20, Epoch=2571, Test Loss=125537.749596721, q=2
+Rank 2: Degree=7, Learning Rate=0.001, Lambda=0.5, Batch Size=20, Epoch=2571, Test Loss=139862.48767464896, q=2
+Rank 3: Degree=7, Learning Rate=0.001, Lambda=0.1, Batch Size=20, Epoch=2571, Test Loss=139883.98162699374, q=2
+Rank 4: Degree=7, Learning Rate=0.001, Lambda=0.2, Batch Size=20, Epoch=2571, Test Loss=139924.09367158657, q=2
 
 ### Overall Analysis
 
 * The best degree of polynomial, based on minimum training error, is Degree 7. However, it has a significantly higher testing error, indicating overfitting.
-* Degree 5 represents a good balance between model complexity and generalization, as it achieves a lower testing error than Degree 4.
-* Degree 3 and Degree 4 also perform reasonably well, capturing the data's non-linearity without excessive complexity.
-* Lower-degree polynomials (Degree 0, Degree 1, Degree 2) are too simplistic and result in high errors.
-* Higher-degree polynomials (Degree 7, Degree 8, Degree 9) tend to overfit the training data and do not generalize well to unseen data.
+* Lower-degree polynomials (Degree 0, Degree 1, Degree 2, Degree 3) are too simplistic and result in high errors.
+* Higher-degree polynomials (Degree 8, Degree 9) tend to overfit the training data and do not generalize well to unseen data.
 
-In summary, Degree 5 or Degree 3 may be the most appropriate choices, depending on the desired trade-off between model complexity and generalization performance. Further tuning and regularization techniques can be applied to improve the models' generalization.
+In summary, Degree 7 may be the most appropriate choices, depending on the desired trade-off between model complexity and generalization performance. Further tuning and regularization techniques can be applied to improve the models' generalization.
+
+# Comparative Analysis of Best Degree Model and Regularized Models
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/all_subplots.png "a title")
+
+# Surface Plots
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/surface_plot_degree_2.png "a title")
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/surface_plot_degree_3.png "a title")
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/surface_plot_degree_4.png "a title")
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/surface_plot_degree_5.png "a title")
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/surface_plot_degree_6.png "a title")
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/surface_plot_degree_7.png "a title")
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/surface_plot_degree_8.png "a title")
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/surface_plot_degree_9.png "a title")
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/surface_plot_regularized_degree_7_q_2_lambda_0.1.png "a title")
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/surface_plot_regularized_degree_7_q_2_lambda_0.2.png "a title")
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/surface_plot_regularized_degree_7_q_2_lambda_0.5.png "a title")
+
+![Alt text](/home/anirudh/Documents/GitHub/RegressionFromScratch/DoubleVariablePolynomialRegression.ipynb/surface_plot_regularized_degree_7_q_2_lambda_1.0.png "a title")

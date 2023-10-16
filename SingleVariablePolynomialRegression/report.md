@@ -113,7 +113,7 @@ Degree 9 represents a nonic model. This is the most complex model among the test
 
 ### Overall Analysis
 
-* The best degree of polynomial, based on minimum training error, is Degree 6. However, it has a significantly higher testing error, indicating overfitting.
+* The best degree of polynomial, based on minimum training error, is Degree 3.
 * Degree 5 represents a good balance between model complexity and generalization, as it achieves a lower testing error than Degree 4.
 * Degree 3 and Degree 4 also perform reasonably well, capturing the data's non-linearity without excessive complexity.
 * The choice of the best degree depends on the specific problem and the trade-off between bias and variance. Degree 5 or Degree 3 may be more suitable choices for practical applications due to their better generalization performance.
